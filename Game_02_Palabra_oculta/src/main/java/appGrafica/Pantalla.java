@@ -9,9 +9,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.JLabel;
 
 /**
  * @author Víctor Lozano
@@ -45,125 +48,167 @@ public class Pantalla extends JFrame {
 		setBounds(100, 100, 600, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setToolTipText("Teclado");
-		panel.setBounds(10, 361, 221, 189);
-		panel.setLayout(null);
-		contentPane.add(panel);
+		JPanel tecladoPanel = new JPanel();
+		tecladoPanel.setBounds(10, 361, 221, 189);
+		tecladoPanel.setToolTipText("Teclado");
+		contentPane.add(tecladoPanel);
+		tecladoPanel.setLayout(null);
 		
-		JButton btnNewButton_1 = new JButton("A");
-		btnNewButton_1.setBounds(0, 0, 39, 39);
-		panel.add(btnNewButton_1);
+		JButton btnA = new JButton("A");
+		btnA.setBounds(0, 0, 39, 39);
+		tecladoPanel.add(btnA);
 		
-		JButton btnNewButton_1_1 = new JButton("B");
-		btnNewButton_1_1.setBounds(38, 0, 39, 39);
-		panel.add(btnNewButton_1_1);
+		JButton btnB = new JButton("B");
+		btnB.setBounds(38, 0, 39, 39);
+		tecladoPanel.add(btnB);
 		
-		JButton btnNewButton_1_2 = new JButton("C");
-		btnNewButton_1_2.setBounds(74, 0, 39, 39);
-		panel.add(btnNewButton_1_2);
+		JButton btnC = new JButton("C");
+		btnC.setBounds(74, 0, 39, 39);
+		tecladoPanel.add(btnC);
 		
-		JButton btnNewButton_1_3 = new JButton("D");
-		btnNewButton_1_3.setBounds(110, 0, 39, 39);
-		panel.add(btnNewButton_1_3);
+		JButton btnD = new JButton("D");
+		btnD.setBounds(110, 0, 39, 39);
+		tecladoPanel.add(btnD);
 		
-		JButton btnNewButton_1_4 = new JButton("E");
-		btnNewButton_1_4.setBounds(147, 0, 39, 39);
-		panel.add(btnNewButton_1_4);
+		JButton btnE = new JButton("E");
+		btnE.setBounds(147, 0, 39, 39);
+		tecladoPanel.add(btnE);
 		
-		JButton btnNewButton_1_5 = new JButton("F");
-		btnNewButton_1_5.setBounds(183, 0, 39, 39);
-		panel.add(btnNewButton_1_5);
+		JButton btnF = new JButton("F");
+		btnF.setBounds(183, 0, 39, 39);
+		tecladoPanel.add(btnF);
 		
-		JButton btnNewButton_1_6 = new JButton("G");
-		btnNewButton_1_6.setBounds(0, 40, 39, 39);
-		panel.add(btnNewButton_1_6);
+		JButton btnG = new JButton("G");
+		btnG.setBounds(0, 40, 39, 39);
+		tecladoPanel.add(btnG);
 		
-		JButton btnNewButton_1_1_1 = new JButton("H");
-		btnNewButton_1_1_1.setBounds(38, 40, 39, 39);
-		panel.add(btnNewButton_1_1_1);
+		JButton btnH = new JButton("H");
+		btnH.setBounds(38, 40, 39, 39);
+		tecladoPanel.add(btnH);
 		
-		JButton btnNewButton_1_2_1 = new JButton("I");
-		btnNewButton_1_2_1.setBounds(74, 40, 39, 39);
-		panel.add(btnNewButton_1_2_1);
+		JButton btnI = new JButton("I");
+		btnI.setBounds(74, 40, 39, 39);
+		tecladoPanel.add(btnI);
 		
-		JButton btnNewButton_1_3_1 = new JButton("J");
-		btnNewButton_1_3_1.setBounds(110, 40, 39, 39);
-		panel.add(btnNewButton_1_3_1);
+		JButton btnJ = new JButton("J");
+		btnJ.setBounds(110, 40, 39, 39);
+		tecladoPanel.add(btnJ);
 		
-		JButton btnNewButton_1_4_1 = new JButton("K");
-		btnNewButton_1_4_1.setBounds(147, 40, 39, 39);
-		panel.add(btnNewButton_1_4_1);
+		JButton btnK = new JButton("K");
+		btnK.setBounds(147, 40, 39, 39);
+		tecladoPanel.add(btnK);
 		
-		JButton btnNewButton_1_5_1 = new JButton("L");
-		btnNewButton_1_5_1.setBounds(183, 40, 39, 39);
-		panel.add(btnNewButton_1_5_1);
+		JButton btnL = new JButton("L");
+		btnL.setBounds(183, 40, 39, 39);
+		tecladoPanel.add(btnL);
 		
-		JButton btnNewButton_1_7 = new JButton("M");
-		btnNewButton_1_7.setFont(new Font("Arial", Font.PLAIN, 9));
-		btnNewButton_1_7.setBounds(0, 78, 39, 39);
-		panel.add(btnNewButton_1_7);
+		JButton btnM = new JButton("M");
+		btnM.setBounds(0, 78, 39, 39);
+		btnM.setFont(new Font("Arial", Font.PLAIN, 9));
+		tecladoPanel.add(btnM);
 		
-		JButton btnNewButton_1_1_2 = new JButton("N");
-		btnNewButton_1_1_2.setBounds(38, 78, 39, 39);
-		panel.add(btnNewButton_1_1_2);
+		JButton btnN = new JButton("N");
+		btnN.setBounds(38, 78, 39, 39);
+		tecladoPanel.add(btnN);
 		
-		JButton btnNewButton_1_2_2 = new JButton("Ñ");
-		btnNewButton_1_2_2.setBounds(74, 78, 39, 39);
-		panel.add(btnNewButton_1_2_2);
+		JButton btnÑ = new JButton("Ñ");
+		btnÑ.setBounds(74, 78, 39, 39);
+		tecladoPanel.add(btnÑ);
 		
-		JButton btnNewButton_1_3_2 = new JButton("O");
-		btnNewButton_1_3_2.setFont(new Font("Arial", Font.PLAIN, 9));
-		btnNewButton_1_3_2.setBounds(110, 78, 39, 39);
-		panel.add(btnNewButton_1_3_2);
+		JButton btnO = new JButton("O");
+		btnO.setBounds(110, 78, 39, 39);
+		btnO.setFont(new Font("Arial", Font.PLAIN, 9));
+		tecladoPanel.add(btnO);
 		
-		JButton btnNewButton_1_4_2 = new JButton("P");
-		btnNewButton_1_4_2.setBounds(147, 78, 39, 39);
-		panel.add(btnNewButton_1_4_2);
+		JButton btnP = new JButton("P");
+		btnP.setBounds(147, 78, 39, 39);
+		tecladoPanel.add(btnP);
 		
-		JButton btnNewButton_1_5_2 = new JButton("Q");
-		btnNewButton_1_5_2.setFont(new Font("Arial", Font.PLAIN, 9));
-		btnNewButton_1_5_2.setBounds(183, 78, 39, 39);
-		panel.add(btnNewButton_1_5_2);
+		JButton btnQ = new JButton("Q");
+		btnQ.setBounds(183, 78, 39, 39);
+		btnQ.setFont(new Font("Arial", Font.PLAIN, 9));
+		tecladoPanel.add(btnQ);
 		
-		JButton btnNewButton_1_8 = new JButton("R");
-		btnNewButton_1_8.setBounds(0, 116, 39, 39);
-		panel.add(btnNewButton_1_8);
+		JButton btnR = new JButton("R");
+		btnR.setBounds(0, 116, 39, 39);
+		tecladoPanel.add(btnR);
 		
-		JButton btnNewButton_1_1_3 = new JButton("S");
-		btnNewButton_1_1_3.setBounds(38, 116, 39, 39);
-		panel.add(btnNewButton_1_1_3);
+		JButton btnS = new JButton("S");
+		btnS.setBounds(38, 116, 39, 39);
+		tecladoPanel.add(btnS);
 		
-		JButton btnNewButton_1_2_3 = new JButton("T");
-		btnNewButton_1_2_3.setBounds(74, 116, 39, 39);
-		panel.add(btnNewButton_1_2_3);
+		JButton btnT = new JButton("T");
+		btnT.setBounds(74, 116, 39, 39);
+		tecladoPanel.add(btnT);
 		
-		JButton btnNewButton_1_3_3 = new JButton("U");
-		btnNewButton_1_3_3.setBounds(110, 116, 39, 39);
-		panel.add(btnNewButton_1_3_3);
+		JButton btnU = new JButton("U");
+		btnU.setBounds(110, 116, 39, 39);
+		tecladoPanel.add(btnU);
 		
-		JButton btnNewButton_1_4_3 = new JButton("V");
-		btnNewButton_1_4_3.setBounds(147, 116, 39, 39);
-		panel.add(btnNewButton_1_4_3);
+		JButton btnV = new JButton("V");
+		btnV.setBounds(147, 116, 39, 39);
+		tecladoPanel.add(btnV);
 		
-		JButton btnNewButton_1_5_3 = new JButton("W");
-		btnNewButton_1_5_3.setFont(new Font("Arial", Font.PLAIN, 8));
-		btnNewButton_1_5_3.setBounds(183, 116, 39, 39);
-		panel.add(btnNewButton_1_5_3);
+		JButton btnW = new JButton("W");
+		btnW.setBounds(183, 116, 39, 39);
+		btnW.setFont(new Font("Arial", Font.PLAIN, 8));
+		tecladoPanel.add(btnW);
 		
-		JButton btnNewButton_1_9 = new JButton("X");
-		btnNewButton_1_9.setBounds(61, 150, 39, 39);
-		panel.add(btnNewButton_1_9);
+		JButton btnX = new JButton("X");
+		btnX.setBounds(61, 150, 39, 39);
+		tecladoPanel.add(btnX);
 		
-		JButton btnNewButton_1_1_4 = new JButton("Y");
-		btnNewButton_1_1_4.setBounds(98, 150, 39, 39);
-		panel.add(btnNewButton_1_1_4);
+		JButton btnY = new JButton("Y");
+		btnY.setBounds(98, 150, 39, 39);
+		tecladoPanel.add(btnY);
 		
-		JButton btnNewButton_1_2_4 = new JButton("Z");
-		btnNewButton_1_2_4.setBounds(134, 150, 39, 39);
-		panel.add(btnNewButton_1_2_4);
+		JButton btnZ = new JButton("Z");
+		btnZ.setBounds(134, 150, 39, 39);
+		tecladoPanel.add(btnZ);
+		
+		JPanel pistasPanel = new JPanel();
+		pistasPanel.setBounds(10, 182, 221, 158);
+		contentPane.add(pistasPanel);
+		pistasPanel.setLayout(null);
+		
+		JPanel palabraSecretaPanel = new JPanel();
+		palabraSecretaPanel.setBounds(10, 93, 201, 54);
+		pistasPanel.add(palabraSecretaPanel);
+		palabraSecretaPanel.setLayout(null);
+		
+		JLabel palabraSecreta = new JLabel("_ _ _ _ _ _ _ _ _ _ _ ");
+		palabraSecreta.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		palabraSecreta.setBounds(10, 11, 181, 32);
+		palabraSecretaPanel.add(palabraSecreta);
+		
+		JPanel menuPanel = new JPanel();
+		menuPanel.setBounds(10, 11, 221, 158);
+		contentPane.add(menuPanel);
+		menuPanel.setLayout(null);
+		
+		JButton btnIniciarJuego = new JButton("Iniciar juego");
+		btnIniciarJuego.setBounds(10, 11, 201, 55);
+		menuPanel.add(btnIniciarJuego);
+		
+		JButton btnResolver = new JButton("Resolver");
+		btnResolver.setBounds(10, 77, 201, 55);
+		menuPanel.add(btnResolver);
+		
+		JPanel imagenesPanel = new JPanel();
+		imagenesPanel.setBounds(241, 11, 333, 539);
+		contentPane.add(imagenesPanel);
+		imagenesPanel.setLayout(null);
+		
+		JLabel imagenLabel = new JLabel("");
+		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Vida10.jpg"));
+		Image imagen = img.getImage();
+		Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
+		img = new ImageIcon(newSize);
+		imagenLabel.setIcon(img);
+		imagenLabel.setBounds(10, 11, 313, 517);
+		imagenesPanel.add(imagenLabel);
 	}
 }
