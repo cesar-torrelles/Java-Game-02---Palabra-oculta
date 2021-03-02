@@ -9,12 +9,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Víctor Lozano
@@ -51,13 +56,13 @@ public class Pantalla extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel tecladoPanel = new JPanel();
+		final JPanel tecladoPanel = new JPanel();
 		tecladoPanel.setBounds(10, 361, 221, 189);
 		tecladoPanel.setToolTipText("Teclado");
 		contentPane.add(tecladoPanel);
 		tecladoPanel.setLayout(null);
 		
-		JButton btnA = new JButton("A");
+		final JButton btnA = new JButton("A");
 		btnA.setBounds(0, 0, 39, 39);
 		tecladoPanel.add(btnA);
 		
@@ -169,7 +174,7 @@ public class Pantalla extends JFrame {
 		btnZ.setBounds(134, 150, 39, 39);
 		tecladoPanel.add(btnZ);
 		
-		JPanel pistasPanel = new JPanel();
+		final JPanel pistasPanel = new JPanel();
 		pistasPanel.setBounds(10, 182, 221, 158);
 		contentPane.add(pistasPanel);
 		pistasPanel.setLayout(null);
@@ -179,7 +184,7 @@ public class Pantalla extends JFrame {
 		pistasPanel.add(palabraSecretaPanel);
 		palabraSecretaPanel.setLayout(null);
 		
-		JLabel palabraSecreta = new JLabel("_ _ _ _ _ _ _ _ _ _ _ ");
+		final JLabel palabraSecreta = new JLabel("");
 		palabraSecreta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		palabraSecreta.setBounds(10, 11, 181, 32);
 		palabraSecretaPanel.add(palabraSecreta);
@@ -189,26 +194,77 @@ public class Pantalla extends JFrame {
 		contentPane.add(menuPanel);
 		menuPanel.setLayout(null);
 		
-		JButton btnIniciarJuego = new JButton("Iniciar juego");
-		btnIniciarJuego.setBounds(10, 11, 201, 55);
-		menuPanel.add(btnIniciarJuego);
 		
 		JButton btnResolver = new JButton("Resolver");
 		btnResolver.setBounds(10, 77, 201, 55);
 		menuPanel.add(btnResolver);
 		
-		JPanel imagenesPanel = new JPanel();
+		final JPanel imagenesPanel = new JPanel();
 		imagenesPanel.setBounds(241, 11, 333, 539);
 		contentPane.add(imagenesPanel);
 		imagenesPanel.setLayout(null);
 		
 		JLabel imagenLabel = new JLabel("");
-		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Vida10.jpg"));
+		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Vida1.jpg"));
 		Image imagen = img.getImage();
 		Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
 		img = new ImageIcon(newSize);
 		imagenLabel.setIcon(img);
 		imagenLabel.setBounds(10, 11, 313, 517);
 		imagenesPanel.add(imagenLabel);
+		
+		JList<String> list = new JList<String>();
+		final DefaultListModel<String> listaDiez = new DefaultListModel<String>();
+		listaDiez.addElement("Tarragona");
+		listaDiez.addElement("Barcelona");
+		listaDiez.addElement("Lleida");
+		listaDiez.addElement("Girona");
+		listaDiez.addElement("Futbol");
+		listaDiez.addElement("Baloncesto");
+		listaDiez.addElement("Macarrones");
+		listaDiez.addElement("Albondigas");
+		listaDiez.addElement("Teclado");
+		list.setModel(listaDiez);
+		list.setVisible(false);
+		list.setBounds(10, 170, 1, 1);
+		contentPane.add(list);
+		
+		tecladoPanel.setVisible(false);
+		imagenesPanel.setVisible(false);
+		pistasPanel.setVisible(false);
+		
+		JButton btnIniciarJuego = new JButton("Iniciar juego");
+		btnIniciarJuego.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				palabraSecreta.setText("");
+				tecladoPanel.setVisible(true);
+				imagenesPanel.setVisible(true);
+				pistasPanel.setVisible(true);
+				int random = (int) (Math.random() * listaDiez.getSize());
+				final String palabra = listaDiez.get(random);
+				for (int i = 0; i < palabra.length(); i++) {
+					palabraSecreta.setText(palabraSecreta.getText() + " _");
+				}
+				
+				btnA.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						palabraSecreta.setText("");
+						for (int j = 0; j < palabra.length(); j++) {
+							if(btnA.getText().equals(palabra.charAt(j))) {	
+								palabraSecreta.setText(palabraSecreta.getText() + " " + palabra.charAt(j));
+							} else {
+								palabraSecreta.setText(palabraSecreta.getText() + " _");
+							}
+						}
+						
+					}
+					
+				});
+			}
+		});
+		btnIniciarJuego.setBounds(10, 11, 201, 55);
+		menuPanel.add(btnIniciarJuego);
+		
 	}
 }
