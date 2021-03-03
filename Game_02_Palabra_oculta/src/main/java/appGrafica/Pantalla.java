@@ -88,36 +88,46 @@ public class Pantalla extends JFrame {
 							for (int i = 0; i < palabra.length(); i++) {
 								palabraSecreta.setText(palabraSecreta.getText() + " _");
 							}
-							btnA.addMouseListener(new Raton());
 						}
 					});
-					btnA.addActionListener(new BotonPulsado());
-					btnB.addActionListener(new BotonPulsado());
-					btnC.addActionListener(new BotonPulsado());
-					btnD.addActionListener(new BotonPulsado());
-					btnE.addActionListener(new BotonPulsado());
-					btnF.addActionListener(new BotonPulsado());
-					btnG.addActionListener(new BotonPulsado());
-					btnH.addActionListener(new BotonPulsado());
-					btnI.addActionListener(new BotonPulsado());
-					btnJ.addActionListener(new BotonPulsado());
-					btnK.addActionListener(new BotonPulsado());
-					btnL.addActionListener(new BotonPulsado());
-					btnM.addActionListener(new BotonPulsado());
-					btnN.addActionListener(new BotonPulsado());
-					btnÑ.addActionListener(new BotonPulsado());
-					btnO.addActionListener(new BotonPulsado());
-					btnP.addActionListener(new BotonPulsado());
-					btnQ.addActionListener(new BotonPulsado());
-					btnR.addActionListener(new BotonPulsado());
-					btnS.addActionListener(new BotonPulsado());
-					btnT.addActionListener(new BotonPulsado());
-					btnU.addActionListener(new BotonPulsado());
-					btnV.addActionListener(new BotonPulsado());
-					btnW.addActionListener(new BotonPulsado());
-					btnX.addActionListener(new BotonPulsado());
-					btnY.addActionListener(new BotonPulsado());
-					btnZ.addActionListener(new BotonPulsado());
+					ActionListener click = new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String letra;
+							JButton boton = (JButton) e.getSource();
+							letra = boton.getText();
+							System.out.println(letra);
+							compruebaLetra(letra);
+							
+						}			
+					};
+					btnA.addActionListener(click);
+					btnB.addActionListener(click);
+					btnC.addActionListener(click);
+					btnD.addActionListener(click);
+					btnE.addActionListener(click);
+					btnF.addActionListener(click);
+					btnG.addActionListener(click);
+					btnH.addActionListener(click);
+					btnI.addActionListener(click);
+					btnJ.addActionListener(click);
+					btnK.addActionListener(click);
+					btnL.addActionListener(click);
+					btnM.addActionListener(click);
+					btnN.addActionListener(click);
+					btnÑ.addActionListener(click);
+					btnO.addActionListener(click);
+					btnP.addActionListener(click);
+					btnQ.addActionListener(click);
+					btnR.addActionListener(click);
+					btnS.addActionListener(click);
+					btnT.addActionListener(click);
+					btnU.addActionListener(click);
+					btnV.addActionListener(click);
+					btnW.addActionListener(click);
+					btnX.addActionListener(click);
+					btnY.addActionListener(click);
+					btnZ.addActionListener(click);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -311,7 +321,7 @@ public class Pantalla extends JFrame {
 
 	}
 
-	public void elegirImagen(int numero) {
+	public static void elegirImagen(int numero) {
 		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Vida" + numero + ".jpg"));
 		Image imagen = img.getImage();
 		Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
@@ -321,7 +331,7 @@ public class Pantalla extends JFrame {
 
 	}
 
-	public void compruebaLetra(String letra) {
+	public static void compruebaLetra(String letra) {
 		String resultado = "";
 		palabraSecreta.setText("");
 		boolean esta = false;
