@@ -3,10 +3,12 @@
  */
 package appGrafica;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -16,6 +18,10 @@ import java.awt.Image;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -28,7 +34,6 @@ import java.awt.event.ActionEvent;
 public class Pantalla extends JFrame {
 	private static int foto = 1;
 	private static String palabra;
-	private static String letrasRestantes;
 	private static JLabel palabraSecreta;
 	private static JLabel imagenLabel;
 	private JPanel contentPane;
@@ -47,7 +52,7 @@ public class Pantalla extends JFrame {
 	private static JButton btnL;
 	private static JButton btnM;
 	private static JButton btnN;
-	private static JButton btn√ë;
+	private static JButton btn—;
 	private static JButton btnO;
 	private static JButton btnP;
 	private static JButton btnQ;
@@ -85,7 +90,6 @@ public class Pantalla extends JFrame {
 							pistasPanel.setVisible(true);
 							int random = (int) (Math.random() * listaDiez.getSize());
 							palabra = listaDiez.get(random);
-							letrasRestantes = palabra;
 							System.out.println(palabra);
 							for (int i = 0; i < palabra.length(); i++) {
 								palabraSecreta.setText(palabraSecreta.getText() + " _");
@@ -98,8 +102,10 @@ public class Pantalla extends JFrame {
 							String letra;
 							JButton boton = (JButton) e.getSource();
 							letra = boton.getText();
+							boton.setEnabled(false);
 							System.out.println(letra);
 							compruebaLetra(letra);
+
 						}
 					};
 					btnA.addActionListener(click);
@@ -116,7 +122,7 @@ public class Pantalla extends JFrame {
 					btnL.addActionListener(click);
 					btnM.addActionListener(click);
 					btnN.addActionListener(click);
-					btn√ë.addActionListener(click);
+					btn—.addActionListener(click);
 					btnO.addActionListener(click);
 					btnP.addActionListener(click);
 					btnQ.addActionListener(click);
@@ -140,6 +146,8 @@ public class Pantalla extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	// PANTALLA
 	public Pantalla() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
@@ -148,6 +156,63 @@ public class Pantalla extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
+		// SECCION DE MENUS - CESAR
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu NewMenuJuego = new JMenu("Juego");
+		menuBar.add(NewMenuJuego);
+
+		// LOGICA MENU SALIR - CESAR
+		JMenuItem MenuItemSalir = new JMenuItem("Salir");
+		MenuItemSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				System.exit(0);
+			}
+		});
+
+		NewMenuJuego.add(MenuItemSalir);
+
+		JMenuItem MenuItemNuevoJuego = new JMenuItem("Nuevo Juego");
+		NewMenuJuego.add(MenuItemNuevoJuego);
+
+		JMenu NewMenuAyuda1 = new JMenu("Ayuda");
+		menuBar.add(NewMenuAyuda1);
+
+		// LOGICA MENU COMO JUGAR - CESAR
+		JMenuItem MenuItemComoJugar = new JMenuItem("Como jugar");
+		MenuItemComoJugar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				JOptionPane.showMessageDialog(null, "Instrucciones: " + "\n1. Has de darle al boton iniciar juego "
+						+ "\n2. Aparecen los espacios de las letras  de una palabra oculta "
+						+ "\n3. Has de adivinar la palabra pulsando en el teclado de palabras que hay abajo "
+						+ "\n4. Si te equivocas, el ahorcado se ira completando "
+						+ "\n5. Tienes 10 intentos antes de que se complete el ahorcado "
+						+ "\n6. Puedes usar las pistas las cuales te descubriran una letra, hay un numero limitado de pistas");
+
+			}
+		});
+
+		NewMenuAyuda1.add(MenuItemComoJugar);
+
+		// LOGICA MENU 'ACERCA DE' - CESAR
+		JMenuItem MenuItemAcercaDe = new JMenuItem("acerca de ");
+		MenuItemAcercaDe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Juego del Ahorcado creado en Java con Swing y AWT "
+						+ "\n \nCreadores: \nVictor Lozano, Cesar Torrelles, Giovanny");
+
+			}
+		});
+		NewMenuAyuda1.add(MenuItemAcercaDe);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		// JPANELS TECLADO Y BOTONES - VICTOR
 		tecladoPanel = new JPanel();
 		tecladoPanel.setBounds(10, 361, 221, 189);
 		tecladoPanel.setToolTipText("Teclado");
@@ -211,9 +276,9 @@ public class Pantalla extends JFrame {
 		btnN.setBounds(38, 78, 39, 39);
 		tecladoPanel.add(btnN);
 
-		btn√ë = new JButton("√ë");
-		btn√ë.setBounds(74, 78, 39, 39);
-		tecladoPanel.add(btn√ë);
+		btn— = new JButton("—");
+		btn—.setBounds(74, 78, 39, 39);
+		tecladoPanel.add(btn—);
 
 		btnO = new JButton("O");
 		btnO.setBounds(110, 78, 39, 39);
@@ -281,25 +346,71 @@ public class Pantalla extends JFrame {
 		palabraSecreta.setBounds(10, 11, 181, 32);
 		palabraSecretaPanel.add(palabraSecreta);
 
+		// VIDAS PANEL - CESAR
+		JPanel vidasPanel = new JPanel();
+		vidasPanel.setBounds(10, 6, 205, 75);
+		pistasPanel.add(vidasPanel);
+		vidasPanel.setLayout(null);
+
+		JToggleButton vida1 = new JToggleButton("1");
+		vida1.setForeground(Color.RED);
+		vida1.setBackground(Color.RED);
+		vida1.setBounds(6, 6, 44, 22);
+		vidasPanel.add(vida1);
+
+		JToggleButton vida2 = new JToggleButton("2");
+		vida2.setBounds(76, 6, 44, 22);
+		vidasPanel.add(vida2);
+		vida2.setForeground(Color.RED);
+		vida2.setBackground(Color.RED);
+
+		JToggleButton vida3 = new JToggleButton("3");
+		vida3.setForeground(Color.RED);
+		vida3.setBackground(Color.RED);
+		vida3.setBounds(155, 6, 44, 22);
+		vidasPanel.add(vida3);
+
+		JToggleButton vida4 = new JToggleButton("4");
+		vida4.setForeground(Color.RED);
+		vida4.setBackground(Color.RED);
+		vida4.setBounds(41, 47, 44, 22);
+		vidasPanel.add(vida4);
+
+		JToggleButton vida5 = new JToggleButton("5");
+		vida5.setForeground(Color.RED);
+		vida5.setBackground(Color.RED);
+		vida5.setBounds(118, 47, 44, 22);
+		vidasPanel.add(vida5);
+		// HASTA AQUI LAS VIDAS
+
+		// PANEL DE PISTAS - VICTOR
 		menuPanel = new JPanel();
-		menuPanel.setBounds(10, 11, 221, 158);
+		menuPanel.setBounds(10, 11, 221, 158); // revisar luego dimensiones
 		contentPane.add(menuPanel);
 		menuPanel.setLayout(null);
 
-		btnResolver = new JButton("Resolver");
-		btnResolver.setBounds(10, 77, 201, 55);
-		menuPanel.add(btnResolver);
+		// boton resolver que luego sera boton pistas
+		// btnResolver = new JButton("Resolver");
+		// btnResolver.setBounds(10, 77, 201, 55); //modificar luego
+		// menuPanel.add(btnResolver);
+
+		// BOTON PISTA, (MODIFICADO DE 'btnResolver')
+		JButton btnPista = new JButton("Pista");
+		btnPista.setBounds(10, 77, 201, 55);
+		menuPanel.add(btnPista);
 
 		imagenesPanel = new JPanel();
 		imagenesPanel.setBounds(241, 11, 333, 539);
 		contentPane.add(imagenesPanel);
 		imagenesPanel.setLayout(null);
 
+		// imagenlABEL - VICTOR
 		imagenLabel = new JLabel();
 		elegirImagen(foto);
 		imagenLabel.setBounds(10, 11, 313, 517);
 		imagenesPanel.add(imagenLabel);
 
+		// JLIST DE PALABRAS PARA ACERTAR - VICTOR
 		list = new JList<String>();
 		listaDiez = new DefaultListModel<String>();
 		listaDiez.addElement("TARRAGONA");
@@ -325,6 +436,7 @@ public class Pantalla extends JFrame {
 
 	}
 
+	// METODO ELECCION DE IMAGEN - VICTOR
 	public static void elegirImagen(int numero) {
 		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Vida" + numero + ".jpg"));
 		Image imagen = img.getImage();
@@ -335,26 +447,61 @@ public class Pantalla extends JFrame {
 
 	}
 
+	// METODO PARA COMPROBAR LA LETRA - VICTOR
 	public static void compruebaLetra(String letra) {
 		String resultado = "";
+		String palabraLabel = palabraSecreta.getText();
+		for (int i = 0; i < palabraLabel.length(); i++) {
+			System.out.println(i + " " + palabraLabel.charAt(i));
+		}
+		palabraSecreta.setText("");
 		boolean esta = false;
-		
-		for (int j = 0; j < palabra.length(); j++) {		//Por cada letra de la palabra comprueba si la otra letra es correcta
-			if (palabra.charAt(j) == letra.charAt(0)) {		//Si es correcta escribela
+		boolean acertado = true;
+		for (int j = 0; j < palabra.length(); j++) {
+			if (palabra.charAt(j) == letra.charAt(0)) {
 				resultado = resultado + " " + letra;
 				esta = true;
-			} else if(palabraSecreta.getText().charAt(j)) {
-				
+			} else if(palabraLabel.charAt(j * 2 +1) >= 'A' && palabraLabel.charAt(j * 2 +1) <= 'Z' ) {
+				resultado = resultado + " " + palabraLabel.charAt(j * 2 + 1);
 			} else {
 				resultado = resultado + " _";
+				acertado = false;
 			}
+		}
+		if (acertado) {			//Si estan todas las letras correctas pasa true
+			ganadorPerdedor(acertado);
 		}
 		palabraSecreta.setText(resultado);
 		if (!esta) {
 			foto++;
+			if(foto < 10) {
 			elegirImagen(foto);
+			} else {
+				elegirImagen(foto);
+				ganadorPerdedor(false); //Si llegas a la imagen 10 pierde
+			}
 		}
-		System.out.println(palabra);
-		System.out.println(palabraSecreta.getText());
+	}
+
+	/**
+	 * @param ganador
+	 */
+	private static void ganadorPerdedor(boolean ganador) {
+		if(ganador) {
+			ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/winner.jpg"));
+			Image imagen = img.getImage();
+			Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
+			img = new ImageIcon(newSize);
+			imagenLabel.setIcon(img);
+			imagenLabel.repaint();
+		} else {
+			ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/perdedor.jpg"));
+			Image imagen = img.getImage();
+			Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
+			img = new ImageIcon(newSize);
+			imagenLabel.setIcon(img);
+			imagenLabel.repaint();
+		}
+		
 	}
 }

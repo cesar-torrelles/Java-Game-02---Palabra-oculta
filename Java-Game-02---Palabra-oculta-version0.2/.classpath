@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Java-Game-02---Palabra-oculta-version0.2/Game_02_Palabra_oculta_0.2/src/main/java"/>
+	<classpathentry kind="src" path="Java-Game-02---Palabra-oculta-version0.2/Game_02_Palabra_oculta_0.2/src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="Java-Game-02---Palabra-oculta-version0.2/Game_02_Palabra_oculta_0.2/target/classes"/>
+</classpath>
