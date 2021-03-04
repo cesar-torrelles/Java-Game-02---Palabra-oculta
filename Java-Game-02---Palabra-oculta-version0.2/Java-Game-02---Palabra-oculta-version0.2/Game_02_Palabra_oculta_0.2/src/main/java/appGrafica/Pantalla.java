@@ -73,6 +73,12 @@ public class Pantalla extends JFrame {
 	private static JList<String> list;
 	private static DefaultListModel<String> listaDiez;
 	private static JButton btnIniciarJuego;
+	private static JToggleButton vida1;
+	private static JToggleButton vida2;
+	private static JToggleButton vida3;
+	private static JToggleButton vida4;
+	private static JToggleButton vida5;
+	private static JPanel vidasPanel;
 
 	/**
 	 * Launch the application.
@@ -362,36 +368,36 @@ public class Pantalla extends JFrame {
 		palabraSecretaPanel.add(palabraSecreta);
 
 		// VIDAS PANEL - CESAR
-		JPanel vidasPanel = new JPanel();
+		vidasPanel = new JPanel();
 		vidasPanel.setBounds(10, 6, 205, 75);
 		pistasPanel.add(vidasPanel);
 		vidasPanel.setLayout(null);
 
-		JToggleButton vida1 = new JToggleButton("1");
+		vida1 = new JToggleButton("1");
 		vida1.setForeground(Color.RED);
 		vida1.setBackground(Color.RED);
 		vida1.setBounds(6, 6, 44, 22);
 		vidasPanel.add(vida1);
 
-		JToggleButton vida2 = new JToggleButton("2");
+		vida2 = new JToggleButton("2");
 		vida2.setBounds(76, 6, 44, 22);
 		vidasPanel.add(vida2);
 		vida2.setForeground(Color.RED);
 		vida2.setBackground(Color.RED);
 
-		JToggleButton vida3 = new JToggleButton("3");
+		vida3 = new JToggleButton("3");
 		vida3.setForeground(Color.RED);
 		vida3.setBackground(Color.RED);
 		vida3.setBounds(155, 6, 44, 22);
 		vidasPanel.add(vida3);
 
-		JToggleButton vida4 = new JToggleButton("4");
+		vida4 = new JToggleButton("4");
 		vida4.setForeground(Color.RED);
 		vida4.setBackground(Color.RED);
 		vida4.setBounds(41, 47, 44, 22);
 		vidasPanel.add(vida4);
 
-		JToggleButton vida5 = new JToggleButton("5");
+		vida5 = new JToggleButton("5");
 		vida5.setForeground(Color.RED);
 		vida5.setBackground(Color.RED);
 		vida5.setBounds(118, 47, 44, 22);
