@@ -84,17 +84,10 @@ public class Pantalla extends JFrame {
 					Pantalla frame = new Pantalla();
 					btnIniciarJuego.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							palabraSecreta.setText("");
-							tecladoPanel.setVisible(true);
-							imagenesPanel.setVisible(true);
-							pistasPanel.setVisible(true);
-							int random = (int) (Math.random() * listaDiez.getSize());
-							palabra = listaDiez.get(random);
-							System.out.println(palabra);
-							for (int i = 0; i < palabra.length(); i++) {
-								palabraSecreta.setText(palabraSecreta.getText() + " _");
-							}
+							iniciarJuego();
+
 						}
+
 					});
 					ActionListener click = new ActionListener() {
 						@Override
@@ -406,7 +399,6 @@ public class Pantalla extends JFrame {
 
 		// imagenlABEL - VICTOR
 		imagenLabel = new JLabel();
-		elegirImagen(foto);
 		imagenLabel.setBounds(10, 11, 313, 517);
 		imagenesPanel.add(imagenLabel);
 
@@ -461,47 +453,99 @@ public class Pantalla extends JFrame {
 			if (palabra.charAt(j) == letra.charAt(0)) {
 				resultado = resultado + " " + letra;
 				esta = true;
-			} else if(palabraLabel.charAt(j * 2 +1) >= 'A' && palabraLabel.charAt(j * 2 +1) <= 'Z' ) {
+			} else if (palabraLabel.charAt(j * 2 + 1) >= 'A' && palabraLabel.charAt(j * 2 + 1) <= 'Z') {
 				resultado = resultado + " " + palabraLabel.charAt(j * 2 + 1);
 			} else {
 				resultado = resultado + " _";
 				acertado = false;
 			}
 		}
-		if (acertado) {			//Si estan todas las letras correctas pasa true
+		if (acertado) { // Si estan todas las letras correctas pasa true
 			ganadorPerdedor(acertado);
 		}
 		palabraSecreta.setText(resultado);
 		if (!esta) {
 			foto++;
-			if(foto < 10) {
-			elegirImagen(foto);
+			if (foto < 10) {
+				elegirImagen(foto);
 			} else {
 				elegirImagen(foto);
-				ganadorPerdedor(false); //Si llegas a la imagen 10 pierde
+				ganadorPerdedor(false); // Si llegas a la imagen 10 pierde
 			}
 		}
 	}
 
 	/**
-	 * @param ganador
+	 * @param Pone imagen ganador o perdedor
 	 */
 	private static void ganadorPerdedor(boolean ganador) {
-		if(ganador) {
+		if (ganador) {
 			ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/winner.jpg"));
 			Image imagen = img.getImage();
-			Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
+			Image newSize = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 			img = new ImageIcon(newSize);
 			imagenLabel.setIcon(img);
 			imagenLabel.repaint();
 		} else {
 			ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/perdedor.jpg"));
 			Image imagen = img.getImage();
-			Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
+			Image newSize = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 			img = new ImageIcon(newSize);
 			imagenLabel.setIcon(img);
 			imagenLabel.repaint();
 		}
-		
+		int reiniciar = JOptionPane.showConfirmDialog(null, "Quieres reiniciar el juego? ", "Reinicio",
+				JOptionPane.YES_NO_OPTION);
+		if (reiniciar == JOptionPane.YES_OPTION) {
+			iniciarJuego();
+		} else {
+			System.exit(0);
+		}
 	}
+
+	private static void iniciarJuego() {
+		palabraSecreta.setText("");
+		tecladoPanel.setVisible(true);
+		imagenesPanel.setVisible(true);
+		pistasPanel.setVisible(true);
+		int random = (int) (Math.random() * listaDiez.getSize());
+		palabra = listaDiez.get(random);
+		System.out.println(palabra);
+		elegirImagen(1);
+		for (int i = 0; i < palabra.length(); i++) {
+			palabraSecreta.setText(palabraSecreta.getText() + " _");
+		}	
+		activarBotones();
+	}
+	
+	private static void activarBotones() {
+		btnA.setEnabled(true);
+		btnB.setEnabled(true);
+		btnC.setEnabled(true);
+		btnD.setEnabled(true);
+		btnE.setEnabled(true);
+		btnF.setEnabled(true);
+		btnG.setEnabled(true);
+		btnH.setEnabled(true);
+		btnI.setEnabled(true);
+		btnJ.setEnabled(true);
+		btnK.setEnabled(true);
+		btnL.setEnabled(true);
+		btnM.setEnabled(true);
+		btnN.setEnabled(true);
+		btnÑ.setEnabled(true);
+		btnO.setEnabled(true);
+		btnP.setEnabled(true);
+		btnQ.setEnabled(true);
+		btnR.setEnabled(true);
+		btnS.setEnabled(true);
+		btnT.setEnabled(true);
+		btnU.setEnabled(true);
+		btnV.setEnabled(true);
+		btnW.setEnabled(true);
+		btnX.setEnabled(true);
+		btnY.setEnabled(true);
+		btnZ.setEnabled(true);
+	}
+
 }
