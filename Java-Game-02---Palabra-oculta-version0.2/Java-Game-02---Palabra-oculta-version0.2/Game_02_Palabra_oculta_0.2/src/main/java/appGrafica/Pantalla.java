@@ -195,7 +195,7 @@ public class Pantalla extends JFrame {
 		NewMenuAyuda1.add(MenuItemComoJugar);
 
 		// LOGICA MENU 'ACERCA DE' - CESAR
-		JMenuItem MenuItemAcercaDe = new JMenuItem("acerca de ");
+		JMenuItem MenuItemAcercaDe = new JMenuItem("Acerca de ");
 		MenuItemAcercaDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Juego del Ahorcado creado en Java con Swing y AWT "
@@ -204,6 +204,20 @@ public class Pantalla extends JFrame {
 			}
 		});
 		NewMenuAyuda1.add(MenuItemAcercaDe);
+		
+		
+		//Añadir palabra al diccionario. VICTOR
+		JMenuItem menuItemAñadirPalabras = new JMenuItem("Añadir palabras");
+		menuItemAñadirPalabras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String palabra = JOptionPane.showInputDialog(null,"Introduce una palabra nueva al diccionario");
+				listaDiez.addElement(palabra);
+			}
+		});
+		NewMenuJuego.add(menuItemAñadirPalabras);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -485,9 +499,6 @@ public class Pantalla extends JFrame {
 				acertado = false;
 			}
 		}
-		if (acertado) { // Si estan todas las letras correctas pasa true
-			ganadorPerdedor(acertado);
-		}
 		palabraSecreta.setText(resultado);
 		if (!esta) {
 			foto++;
@@ -497,6 +508,9 @@ public class Pantalla extends JFrame {
 				elegirImagen(foto);
 				ganadorPerdedor(false); // Si llegas a la imagen 10 pierde
 			}
+		}
+		if (acertado) { // Si estan todas las letras correctas pasa true
+			ganadorPerdedor(true);
 		}
 	}
 
