@@ -33,7 +33,7 @@ import java.awt.event.ActionEvent;
  *
  */
 public class Pantalla extends JFrame {
-	private static int foto = 1;
+	private static int foto;
 	private static String palabra;
 	private static JLabel palabraSecreta;
 	private static JLabel imagenLabel;
@@ -53,7 +53,7 @@ public class Pantalla extends JFrame {
 	private static JButton btnL;
 	private static JButton btnM;
 	private static JButton btnN;
-	private static JButton btnÑ;
+	private static JButton btn�;
 	private static JButton btnO;
 	private static JButton btnP;
 	private static JButton btnQ;
@@ -70,7 +70,6 @@ public class Pantalla extends JFrame {
 	private static JPanel palabraSecretaPanel;
 	private static JPanel tecladoPanel;
 	private static JPanel menuPanel;
-	private static JButton btnResolver;
 	private static JPanel imagenesPanel;
 	private static JList<String> list;
 	private static DefaultListModel<String> listaDiez;
@@ -85,11 +84,11 @@ public class Pantalla extends JFrame {
 	private static JPanel vidasPanel;
 	private static String nivelDelJugador;
 	private static int numeroVidasElegido;
-	
-	
+
 	// 16 @giorocor crear opciones de input pista
-		private static String[] eleccionPista = { "No", "Si" };
-		private static int pista = 0;
+	private static String[] eleccionPista = { "No", "Si" };
+	private static int pista = 0;
+	private static String[] vidas = {"1","2","3","4","5" };
 
 	/**
 	 * Launch the application.
@@ -102,10 +101,7 @@ public class Pantalla extends JFrame {
 					
 					btnIniciarJuego.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							
-							
-							iniciarJuego();
-							
+							iniciarJuego();	
 						}
 
 					});
@@ -120,7 +116,6 @@ public class Pantalla extends JFrame {
 							letra = boton.getText();
 							boton.setEnabled(false);
 							compruebaLetra(letra);
-
 						}
 					};
 					btnA.addActionListener(click);
@@ -137,7 +132,7 @@ public class Pantalla extends JFrame {
 					btnL.addActionListener(click);
 					btnM.addActionListener(click);
 					btnN.addActionListener(click);
-					btnÑ.addActionListener(click);
+					btn�.addActionListener(click);
 					btnO.addActionListener(click);
 					btnP.addActionListener(click);
 					btnQ.addActionListener(click);
@@ -288,20 +283,36 @@ public class Pantalla extends JFrame {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						
-						
-						
-						if (pista == 0) {
-							pista = darOpciones(eleccionPista, "ADVERTENCIA: ¿Deseas perder una vida a cambio de una pista? "); //16.2
-							foto = foto + pista;
-							elegirImagen(foto);
 							
-							// 16Al dar la pista se consume una vida del ahorcado  - 16.3
-							numeroVidasElegido -=1; 
-							numeroDeVidas(numeroVidasElegido);
+						//@giorocor Pregunta si desea la pista
+					
+						//@giorocor En caso de que si la desee sucede el codigo siguiente
+						if (pista == 0) {
+							//@giorocorQuita una vida
+							pista = darOpciones(eleccionPista, "ADVERTENCIA: ¿Deseas perder una vida a cambio de una pista? ");
+							
+							if (pista == 1) {
+								foto = foto + pista;
+								elegirImagen(foto);
+								
+								//@giorocor Da la pista
+							    int i=0;
+							    String pistaLetra;
+							
+							    
+								do {
+									pistaLetra=(palabraSecreta.getText().contains(palabra.substring(i,i+1)))?"n":palabra.substring(i,i+1);
+									i++;
+								}while(palabraSecreta.getText().contains(palabra.substring(i-1,i-1+1)));
+								compruebaLetra(pistaLetra);
+						
+								
+								// 16Al dar la pista se consume una vida del ahorcado  - 16.3
+								numeroVidasElegido -=1; 
+								numeroDeVidas(numeroVidasElegido);
+							}
 
 						} else {
-
 							// 16 si ya se ha consumido las ayudas aparecera este mensaje
 							JOptionPane.showMessageDialog(null, "No hay mas ayudas disponibles");
 						}
@@ -564,7 +575,7 @@ public class Pantalla extends JFrame {
 		img = new ImageIcon(newSize);
 		imagenLabel.setIcon(img);
 		imagenLabel.repaint();
-		intentosFallidos.setText(String.valueOf("Intentos fallidos: "+(foto-1)+"/10"));
+		intentosFallidos.setText(String.valueOf("Intentos fallidos: "+(foto)+"/10"));
 
 	}
 
@@ -589,16 +600,18 @@ public class Pantalla extends JFrame {
 		palabraSecreta.setText(resultado);
 		if (!esta) {
 			foto++;
-			if (foto < 10) {
-				elegirImagen(foto);
 			
-				// 16 @giorocor oculta boton de pista en la ultima vida 16
-			}else if (foto == 9) {
-				elegirImagen(foto);
-					btnResolver.setVisible(false);
-			} else {
-				elegirImagen(foto);
-				ganadorPerdedor(false); // Si llegas a la imagen 10 pierde
+			// 16 @giorocor oculta boton de pista en la ultima vida 16
+			if (foto == 9) {
+					elegirImagen(foto);
+					btnPista.setVisible(false);
+			// 16 @giorocor al decimo intento da por perdido la partida
+			} else if(foto==10){
+					elegirImagen(foto);
+					ganadorPerdedor(false); 
+			// en caso contrario sigue el juego y cambiara la imagen del ahorcado
+			}else {
+					elegirImagen(foto);
 			}
 		}
 		if (acertado) { // Si estan todas las letras correctas pasa true
@@ -633,10 +646,10 @@ public class Pantalla extends JFrame {
 		}
 		
 		//mensaje de reinicio del juego despues de ganar o perder - 8.3
-		int reiniciar = JOptionPane.showConfirmDialog(null, "Quieres reiniciar el juego? ", "Reinicio",
+		int reiniciar = JOptionPane.showConfirmDialog(null, "¿Quieres seguir Jugado? ", "Reinicio",
 				JOptionPane.YES_NO_OPTION);
 		if (reiniciar == JOptionPane.YES_OPTION) {
-			iniciarJuego();
+			siguientePalabra();
 		} else {
 			System.exit(0);
 		}
@@ -645,30 +658,27 @@ public class Pantalla extends JFrame {
 	
 	// MEOTODO INICIO JUEGO
 	private static void iniciarJuego() {
-		
-		
-		
-		 menuNivel();
-		 
-		 cuantasVidas();
-		 
-		 
+
+		menuNivel();	 
+		cuantasVidas();	 
 		palabraSecreta.setText("");
 		tecladoPanel.setVisible(true);
 		imagenesPanel.setVisible(true);
 		pistasPanel.setVisible(true);
 		btnPista.setVisible(true);
-		int random = (int) (Math.random() * listaDiez.getSize());
-		palabra = listaDiez.get(random);
-		foto = 1;
-		elegirImagen(foto);
-		for (int i = 0; i < palabra.length(); i++) {
-			palabraSecreta.setText(palabraSecreta.getText() + " _");
-		}
+		elegirPalabra();
 		activarBotones();
 	}
 	
-	
+	//@giorocor seleccion ramdon de la palabra a adivinar
+	public static void elegirPalabra() {
+		int random = (int) (Math.random() * listaDiez.getSize());
+		palabra = listaDiez.get(random);
+		
+		for (int i = 0; i < palabra.length(); i++) {
+			palabraSecreta.setText(palabraSecreta.getText() + " _");
+		}
+	}
 		
 		
 		
@@ -677,7 +687,6 @@ public class Pantalla extends JFrame {
 	// METODO  HABILITAR/DESHABILITAR TODOS LOS BOTONES A LA VEZ - 1
 
 	private static void activarBotones() {
-		
 		btnA.setEnabled(true);
 		btnB.setEnabled(true);
 		btnC.setEnabled(true);
@@ -707,17 +716,26 @@ public class Pantalla extends JFrame {
 		btnZ.setEnabled(true);
 	}
 	
+	
+	
+	//@giorocor
+	public static void siguientePalabra() {
+		palabraSecreta.setText("");
+		elegirPalabra();
+		pista=0;
+		elegirImagen(foto);
+		activarBotones();
+	}
+	
+	
 	//metodo para saber las vidas con las que se empieza
 	 public static void cuantasVidas() {
-		  
-			String numeroString =   JOptionPane.showInputDialog( "Cantidad de vidas: ");
-			   
-			 numeroVidasElegido = Integer.parseInt(numeroString);
-			  
-			
-			 numeroDeVidas(numeroVidasElegido);
-			 
-		  }
+		  //@giorocor Metodo para solicitar vidas
+		 int numeroString = darOpciones(vidas, "Cantidad de vidas: ");
+		 numeroVidasElegido = numeroString+1;
+			 //@giorocor Metodo para hacer visible cuadros de vidas dada 
+		 numeroDeVidas(numeroVidasElegido);
+	}
 	
 	//NUMERO DE VIDAS DISPONIBLES - 3.1
 	public static void numeroDeVidas(int num) {
@@ -761,11 +779,11 @@ public class Pantalla extends JFrame {
 				vida5.setVisible(true);
 				break;
 			default:
-				vida1.setVisible(true);
-				vida2.setVisible(true);
-				vida3.setVisible(true);
-				vida4.setVisible(true);
-				vida5.setVisible(true);
+				vida1.setVisible(false);
+				vida2.setVisible(false);
+				vida3.setVisible(false);
+				vida4.setVisible(false);
+				vida5.setVisible(false);
 				break;
 				
 		}	
@@ -778,44 +796,33 @@ public class Pantalla extends JFrame {
 	private static void menuNivel () {
 	
 		String niveles[] ={"Junior","Medio","Avanzado"};
-		
-
 
 		 Object respuesta = JOptionPane.showInputDialog(null,"Elige tu nivel", "Nivel de juego",JOptionPane.QUESTION_MESSAGE,null,niveles, niveles[0]);
-		
-		 
 		 String nivelDelJugador = String.valueOf(respuesta);
-		 
-		 System.out.println(nivelElegido(nivelDelJugador));
-		 System.out.println(nivelDelJugador);
-		
-		 
-		 
+		 nivelElegido(nivelDelJugador);
+
 	}
 	 
 	 
 	
 		// IMAGENES DISPONIBLES segun el nivel - 14
-		
 		public static int nivelElegido(String nivelDelJugador) {
 			
 		int nivel=0;
-			
 			switch (nivelDelJugador) {
 			case "Junior":
-				nivel = 1;
-				//elegirImagen(foto);
+				foto = 1;
+				elegirImagen(foto);
 				
 				break;
 			case "Medio":
-				nivel = 2;
-				//elegirImagen(foto);
+				foto = 2;
+				elegirImagen(foto);
 				
 				break;
 			case "Avanzado":
-				nivel = 4;
-				//elegirImagen(foto);
-				
+				foto= 4;
+				elegirImagen(foto);
 				break;
 			}
 			return nivel;

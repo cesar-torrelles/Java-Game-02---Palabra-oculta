@@ -343,9 +343,9 @@ public class Pantalla extends JFrame {
 			if (palabra.charAt(j) == letra.charAt(0)) {		//Si es correcta escribela
 				resultado = resultado + " " + letra;
 				esta = true;
-			} else if(palabraSecreta.getText().charAt(j)) {
+			} /*else if(palabraSecreta.getText().charAt(j)) {
 				
-			} else {
+			}*/ else {
 				resultado = resultado + " _";
 			}
 		}
