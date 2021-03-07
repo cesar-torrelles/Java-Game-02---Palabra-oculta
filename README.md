@@ -1,4 +1,4 @@
-# Unidad 20 - Conexion Java/MySQL
+# Unidad 20 - Swing, AWT y Maven en Java
 Conexion Java-MySQL
 
 ### Equipo de desarrollo:
