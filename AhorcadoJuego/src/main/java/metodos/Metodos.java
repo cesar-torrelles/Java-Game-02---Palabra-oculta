@@ -134,7 +134,7 @@ public class Metodos {
 		Pantalla.palabraSecreta.setText("");
 		elegirPalabra();
 		Pantalla.pista = 0;
-		elegirImagen(Pantalla.foto = 0);
+		elegirImagen(Pantalla.foto);
 		activarBotones();
 	}
 
@@ -259,7 +259,7 @@ public class Metodos {
 			int reiniciar = JOptionPane.showConfirmDialog(null, "¡Felicidades! ¡Has Ganado!, ¿Quieres seguir Jugado? ",
 					"Reinicio", JOptionPane.YES_NO_OPTION);
 			if (reiniciar == JOptionPane.YES_OPTION) {
-				iniciarJuego();
+				siguientePalabra();
 			} else {
 				System.exit(0);
 			}
@@ -282,7 +282,7 @@ public class Metodos {
 						"¡Has perdido todas las vidas... y deberias estar programando!  ¿Aun asi...Quieres volver a empezar? ",
 						"Reinicio", JOptionPane.YES_NO_OPTION);
 				if (reiniciar == JOptionPane.YES_OPTION) {
-					iniciarJuego();
+					 iniciarJuego();
 				} else {
 					System.exit(0);
 
