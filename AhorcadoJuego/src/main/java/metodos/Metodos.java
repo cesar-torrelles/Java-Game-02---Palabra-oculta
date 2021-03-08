@@ -12,9 +12,7 @@ public class Metodos {
 
 	// MEOTODO que realiza el inicio del Juego
 	public static void iniciarJuego() {
-
-		menuNivel();
-		cuantasVidas();
+		Pantalla.foto = 1;
 		Pantalla.palabraSecreta.setText("");
 		Pantalla.tecladoPanel.setVisible(true);
 		Pantalla.imagenesPanel.setVisible(true);
@@ -93,7 +91,7 @@ public class Metodos {
 	}
 
 	// METODO donde recogemos el valor del nivel escogido por el jugador
-	private static void menuNivel() {
+	public static void menuNivel() {
 
 		String niveles[] = { "Junior", "Medio", "Avanzado" };
 
@@ -259,6 +257,7 @@ public class Metodos {
 			int reiniciar = JOptionPane.showConfirmDialog(null, "¡Felicidades! ¡Has Ganado!, ¿Quieres seguir Jugado? ",
 					"Reinicio", JOptionPane.YES_NO_OPTION);
 			if (reiniciar == JOptionPane.YES_OPTION) {
+				Pantalla.pista = 0;
 				iniciarJuego();
 			} else {
 				System.exit(0);
@@ -282,12 +281,24 @@ public class Metodos {
 						"¡Has perdido todas las vidas... y deberias estar programando!  ¿Aun asi...Quieres volver a empezar? ",
 						"Reinicio", JOptionPane.YES_NO_OPTION);
 				if (reiniciar == JOptionPane.YES_OPTION) {
+					Pantalla.pista = 0;
 					iniciarJuego();
+					menuNivel();
+					cuantasVidas();
 				} else {
 					System.exit(0);
 
 				}
 
+			} else {// mensaje de reinicio del juego despues de ganar o perder
+				int reiniciar = JOptionPane.showConfirmDialog(null,
+						"¡No has acertado la palabra!, ¿Quieres seguir Jugado? ", "Reinicio", JOptionPane.YES_NO_OPTION);
+				if (reiniciar == JOptionPane.YES_OPTION) {
+					Pantalla.pista = 0;
+					iniciarJuego();
+				} else {
+					System.exit(0);
+				}
 			}
 		}
 

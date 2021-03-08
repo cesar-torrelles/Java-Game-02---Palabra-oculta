@@ -26,6 +26,8 @@ public class Main {
 							
 							
 							Metodos.iniciarJuego();	
+							Metodos.menuNivel();
+							Metodos.cuantasVidas();
 						}
 
 					});
